@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [ $# -ne 3 ]
+then
+	echo "usage: mkcert [name] [host] [password]"
+else
+	mkdir -p certs
+
+	tnow=`date +%s`
+
+	days=`expr \( 2147483647 - $tnow \) / 86400`
+
+	sed "s/_HOST_/$2/" cert.conf > work.conf
+
+	openssl genrsa -des3 -passout pass:$3 -out certs/$1.key 2048
+
+	openssl req -x509 -new \
+		-key certs/$1.key -passin pass:$3 \
+		-config work.conf -sha256 -days $days \
+		-out certs/$1.crt
+
+	openssl x509 \
+		-in certs/$1.crt \
+		-outform DER \
+		-out certs/$1.der
+
+	rm work.conf
+fi

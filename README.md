@@ -2,10 +2,10 @@
 
 Generate Cert Files and Keys Needed for Matrikon OPC Tunneller
 
-The mkcert script can be used to create both the server cert and key for an
-OPC UA server, and the client cert and key for the Matrikon OPC Tunneller.
-
-For example, you may run these commands to generate the cert and key files:
+The mkcert script can be used to create both the server cert and key
+for an OPC UA server, and the client cert and key for the Matrikon
+OPC Tunneller. For example, you may run the commands below to generate
+the cert and key files for both ends of the connection:
 
 	./mkcert server opc-server password
 	./mkcert client opc-client password
